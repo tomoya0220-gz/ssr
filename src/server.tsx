@@ -25,6 +25,7 @@ app.get('*', (req: Request, res: Response) => {
   res.send(html);
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+const PORT = 9000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
