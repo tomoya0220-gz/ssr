@@ -1,8 +1,9 @@
-import React from "react"
+import React from "react";
+import './App.css';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <div className="hello">
       <h1>Hello world!</h1>
     </div>
   );
