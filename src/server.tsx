@@ -10,19 +10,26 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get('*', (req: Request, res: Response) => {
-  const appString = renderToString(<App />);
+  const initialData = { message: 'Hello from server!' };
+  console.log('Initial data on server:', initialData);
+
+  const appString = renderToString(<App initialData={initialData} />);
   const html = `
     <!DOCTYPE html>
     <html>
       <head>
         <title>React SSR with TypeScript</title>
+        <script>
+          window.__INITIAL_DATA__ = ${JSON.stringify(initialData).replace(/</g, '\\u003c')};
+        </script>
       </head>
       <body>
         <div id="root">${appString}</div>
-        <script src="/bundle.js"></script>
+        <script src="/bundle.js"></>
       </body>
     </html>
   `;
+  console.log('HTML sent to client:\n', html);
   res.send(html);
 });
 

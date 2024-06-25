@@ -1,12 +1,22 @@
-import React from "react";
-// import './App.css';
-// import style from './App.css';
+import React, { useEffect, useState } from "react";
+import ErrorBoundary from "./ErrorBoundary";
+interface AppProps {
+  initialData?: {
+    message: string
+  };
+}
 
-const App: React.FC = () => {
+const App: React.FC<AppProps> = ({ initialData }) => {
+  console.log('App component received initial data:', initialData);
+
+  const message = initialData?.message || 'No message provided';
+
   return (
-    <div style={{fontSize: '2em', color: "blue"}}>
-      <h1>Hello world!</h1>
-    </div>
+    <ErrorBoundary>
+      <div>
+        <h1 style={{ color: 'blue' }}>{message}</h1>
+      </div>
+    </ErrorBoundary>
   );
 };
 
