@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
-app.get('*', (req: Request, res: Response) => {
+app.get('*', async (req: Request, res: Response) => {
   const initialData = { message: 'Hello from server!' };
   console.log('Initial data on server:', initialData);
 
@@ -19,9 +19,6 @@ app.get('*', (req: Request, res: Response) => {
     <html>
       <head>
         <title>React SSR with TypeScript</title>
-        <script>
-          window.__INITIAL_DATA__ = ${JSON.stringify(initialData).replace(/</g, '\\u003c')};
-        </script>
       </head>
       <body>
         <div id="root">${appString}</div>
@@ -30,7 +27,7 @@ app.get('*', (req: Request, res: Response) => {
     </html>
   `;
   console.log('HTML sent to client:\n', html);
-  res.send(html);
+  await res.send(html);
 });
 
 const PORT = 9000;

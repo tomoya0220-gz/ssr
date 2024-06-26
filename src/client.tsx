@@ -2,7 +2,7 @@ import { hydrateRoot } from "react-dom/client";
 import App from "./App";
 import React from "react";
 
-const initialData = (window as any).__INITIAL_DATA__;
+const initialData = { message: 'Hello from server!' };
 console.log('Initial data from window:', initialData);
 
 if (!initialData) {
